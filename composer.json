@@ -1,0 +1,35 @@
+{
+    "name": "solunes/inventory",
+    "description": "Paquete adicional de Inventario para Solunes Digital.",
+    "keywords": ["laravel", "solunes", "inventory"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Solunes Digital",
+            "email": "info@solunes.com"
+        }
+    ],
+    "require": {
+        "solunes/master": "1.*",
+        "solunes/business": "1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/database/migrations",
+            "src/app/Providers",
+            "src/app/Controllers",
+            "src/app/Console"
+       ],
+        "psr-4": {
+            "Solunes\\Inventory\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "scripts": {
+        "test": "phpunit"
+    },
+    "prefer-stable": true
+}

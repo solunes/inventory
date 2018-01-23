@@ -1,0 +1,89 @@
+.solunes-inventory {
+  /* Inventory: Table */
+  /* Inventory: Form */ }
+  .solunes-inventory h1 {
+    font-size: 30px; }
+  .solunes-inventory h3 {
+    font-size: 26px; }
+  .solunes-inventory p {
+    margin-top: 0;
+    margin-bottom: 15px; }
+  .solunes-inventory .order-block {
+    background: #f2f2f2;
+    padding: 30px 40px 45px; }
+  .solunes-inventory .table-bordered-top {
+    border-top: 1px solid #ddd; }
+    .solunes-inventory .table-bordered-top td, .solunes-inventory .table-bordered-top th {
+      border-bottom: 1px solid #ddd; }
+  .solunes-inventory .method-title {
+    margin-top: 30px; }
+  .solunes-inventory .panel-title {
+    font-weight: bold; }
+  .solunes-inventory .payment-method {
+    margin-bottom: 30px;
+    margin-top: 20px; }
+  .solunes-inventory table.table-inventory {
+    margin-bottom: 30px; }
+    .solunes-inventory table.table-inventory td.strong {
+      font-weight: bold; }
+    .solunes-inventory table.table-inventory tr {
+      display: table-row; }
+    .solunes-inventory table.table-inventory th {
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap; }
+    .solunes-inventory table.table-inventory td, .solunes-inventory table.table-inventory th {
+      border-bottom: 1px solid #ddd !important;
+      border-top: medium none;
+      padding: 20px 10px;
+      vertical-align: middle;
+      text-align: center; }
+    .solunes-inventory table.table-inventory td input {
+      background: #e5e5e5;
+      border: none;
+      border-radius: 3px;
+      color: #6f6f6f;
+      font-size: 15px;
+      font-weight: 400;
+      height: 40px;
+      padding: 0 5px 0 10px;
+      width: 60px; }
+    .solunes-inventory table.table-inventory .product-thumbnail {
+      width: 80px;
+      padding: 10px; }
+    .solunes-inventory table.table-inventory .product-price {
+      width: 130px; }
+    .solunes-inventory table.table-inventory .product-quantity {
+      width: 180px; }
+    .solunes-inventory table.table-inventory .product-name {
+      width: 270px; }
+    .solunes-inventory table.table-inventory .amount {
+      font-size: 15px;
+      font-weight: 700; }
+  .solunes-inventory .inventory-form {
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #e5e5e5; }
+  .solunes-inventory .checkout-form-list {
+    margin-bottom: 30px; }
+  .solunes-inventory input {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 0;
+    height: 42px;
+    width: 100%;
+    padding: 0 0 0 10px; }
+  .solunes-inventory select {
+    width: 100%;
+    background: #eceff8;
+    border: 2px solid #eceff8;
+    height: 45px;
+    padding-left: 10px;
+    box-shadow: none;
+    font-size: 14px;
+    color: #626262; }
+  .solunes-inventory input.btn-site {
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px; }
