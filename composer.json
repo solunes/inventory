@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "solunes/master": "1.*",
+        "solunes/master": "*",
         "solunes/business": "1.*"
     },
     "require-dev": {
