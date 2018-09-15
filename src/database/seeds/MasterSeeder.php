@@ -13,7 +13,8 @@ class MasterSeeder extends Seeder {
      */
     public function run()
     {
-        $node_product_stock = \Solunes\Master\App\Node::create(['name'=>'product-stock', 'type'=>'child', 'location'=>'inventory', 'parent_id'=>$node_product->id]);
+        $node_product = \Solunes\Master\App\Node::where('name','product-bridge')->first();
+        $node_product_bridge_stock = \Solunes\Master\App\Node::create(['name'=>'product-bridge-stock', 'type'=>'child', 'location'=>'inventory', 'parent_id'=>$node_product->id]);
         $node_purchase = \Solunes\Master\App\Node::create(['name'=>'purchase', 'location'=>'inventory', 'folder'=>'products']);
         $node_purchase_product = \Solunes\Master\App\Node::create(['name'=>'purchase-product', 'type'=>'child', 'location'=>'inventory', 'parent_id'=>$node_purchase->id]);
         $node_inventory_movement = \Solunes\Master\App\Node::create(['name'=>'inventory-movement', 'location'=>'inventory', 'folder'=>'products']);

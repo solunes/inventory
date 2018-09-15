@@ -71,6 +71,6 @@ class NodesInventory extends Migration
         Schema::dropIfExists('inventory_movements');
         Schema::dropIfExists('purchase_products');
         Schema::dropIfExists('purchases');
-        Schema::dropIfExists('product_stocks');
+        Schema::dropIfExists('product_bridge_stocks');
     }
 }
