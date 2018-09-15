@@ -11,7 +11,7 @@ class PurchaseProduct extends Model {
     
     /* Creating rules */
     public static $rules_create_order = array(
-        'product_id'=>'required',
+        'product_bridge_id'=>'required',
         'status'=>'required',
         'quantity'=>'required',
         'currency_id'=>'required',
@@ -22,7 +22,7 @@ class PurchaseProduct extends Model {
 
 	/* Creating rules */
 	public static $rules_create = array(
-        'product_id'=>'required',
+        'product_bridge_id'=>'required',
         'status'=>'required',
         'quantity'=>'required',
         'currency_id'=>'required',
@@ -34,7 +34,7 @@ class PurchaseProduct extends Model {
 	/* Updating rules */
 	public static $rules_edit = array(
 		'id'=>'required',
-        'product_id'=>'required',
+        'product_bridge_id'=>'required',
         'status'=>'required',
         'quantity'=>'required',
         'currency_id'=>'required',
@@ -51,7 +51,7 @@ class PurchaseProduct extends Model {
         return $this->belongsTo('Solunes\Business\App\Currency');
     }
 
-    public function product() {
+    public function product_bridge() {
         return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
 

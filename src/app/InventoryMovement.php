@@ -11,8 +11,8 @@ class InventoryMovement extends Model {
 
 	/* Creating rules */
 	public static $rules_create = array(
-		'product_id'=>'required',
-		'place_id'=>'required',
+		'product_bridge_id'=>'required',
+		'agency_id'=>'required',
 		'type'=>'required',
 		'name'=>'required',
 	);
@@ -20,8 +20,8 @@ class InventoryMovement extends Model {
 	/* Updating rules */
 	public static $rules_edit = array(
 		'id'=>'required',
-		'product_id'=>'required',
-		'place_id'=>'required',
+		'product_bridge_id'=>'required',
+		'agency_id'=>'required',
 		'type'=>'required',
 		'name'=>'required',
 	);
@@ -30,8 +30,8 @@ class InventoryMovement extends Model {
         return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
 
-    public function place() {
-        return $this->belongsTo('Solunes\Business\App\Place');
+    public function agency() {
+        return $this->belongsTo('Solunes\Business\App\Agency');
     }
 
 }

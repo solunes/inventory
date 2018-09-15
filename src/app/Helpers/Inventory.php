@@ -4,11 +4,11 @@ namespace Solunes\Inventory\App\Helpers;
 
 class Inventory {
 
-    public static function inventory_movement($place, $product, $type, $quantity, $name, $transaction, $item, $transaction_code = NULL) {
+    public static function inventory_movement($agency, $product, $type, $quantity, $name, $transaction, $item, $transaction_code = NULL) {
 
         // Crear Movimiento de Inventario
-        $product_movement = new \Solunes\Store\App\InventoryMovement;
-        $product_movement->place_id = $place->id;
+        $product_movement = new \Solunes\Inventory\App\InventoryMovement;
+        $product_movement->agency_id = $agency->id;
         $product_movement->product_id = $product->id;
         $product_movement->type = $type;
         $product_movement->quantity = $quantity;
@@ -20,12 +20,12 @@ class Inventory {
         if($type=='move_out'){
             $real_quantity = -$quantity;
         }
-        if($product_stock = \Solunes\Store\App\ProductStock::where('parent_id', $product->id)->where('place_id', $place->id)->first()){
+        if($product_stock = \Solunes\Intenvory\App\ProductStock::where('parent_id', $product->id)->where('agency_id', $agency->id)->first()){
             $product_stock->quantity = $product_stock->quantity + $real_quantity;
         } else {
-            $product_stock = new \Solunes\Store\App\ProductStock;
+            $product_stock = new \Solunes\Intenvory\App\ProductStock;
             $product_stock->parent_id = $product->id;
-            $product_stock->place_id = $place->id;
+            $product_stock->agency_id = $agency->id;
             $product_stock->initial_quantity = $quantity;
             $product_stock->quantity = $quantity;
         }
@@ -126,11 +126,11 @@ class Inventory {
         if($transaction!='register_product_purchase'){
             $currency_id = $product->currency_id;
             $amount = $product->cost * $quantity;
-            $asset_stock = \Solunes\Store\App\Account::getCode('asset_stock')->id;
+            $asset_stock = \Solunes\Accounting\App\Account::getCode('asset_stock')->id;
             if($transaction=='register_product_drop'){
-                $expense_sale = \Solunes\Store\App\Account::getCode('expense_inventory_loss')->id;
+                $expense_sale = \Solunes\Accounting\App\Account::getCode('expense_inventory_loss')->id;
             } else {
-                $expense_sale = \Solunes\Store\App\Account::getCode('expense_sale')->id;
+                $expense_sale = \Solunes\Accounting\App\Account::getCode('expense_sale')->id;
             }
             if($type=='move_out'){
                 $stock_type = 'credit';
@@ -139,9 +139,9 @@ class Inventory {
                 $stock_type = 'debit';
                 $expense_type = 'credit';
             }
-            $arr[] = \Store::register_account($place->id, $stock_type, $asset_stock, $currency_id, $amount, $name);
-            $arr[] = \Store::register_account($place->id, $expense_type, $expense_sale, $currency_id, $amount, $name);
-            \Store::register_account_array($arr, $item->created_at, $transaction_code);
+            $arr[] = \Accounting::register_account($place->id, $stock_type, $asset_stock, $currency_id, $amount, $name);
+            $arr[] = \Accounting::register_account($place->id, $expense_type, $expense_sale, $currency_id, $amount, $name);
+            \Accounting::register_account_array($arr, $item->created_at, $transaction_code);
         }
     }
     
