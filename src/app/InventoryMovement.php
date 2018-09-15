@@ -26,12 +26,12 @@ class InventoryMovement extends Model {
 		'name'=>'required',
 	);
                         
-    public function product() {
-        return $this->belongsTo('Solunes\Inventory\App\Product');
+    public function product_bridge() {
+        return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
 
     public function place() {
-        return $this->belongsTo('Solunes\Inventory\App\Place');
+        return $this->belongsTo('Solunes\Business\App\Place');
     }
 
 }

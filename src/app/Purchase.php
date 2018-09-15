@@ -27,7 +27,7 @@ class Purchase extends Model {
 	);
                         
     public function place() {
-        return $this->belongsTo('Solunes\Inventory\App\Place');
+        return $this->belongsTo('Solunes\Business\App\Place');
     }
 
     public function user() {
@@ -35,7 +35,7 @@ class Purchase extends Model {
     }
 
     public function currency() {
-        return $this->belongsTo('Solunes\Inventory\App\Currency');
+        return $this->belongsTo('Solunes\Business\App\Currency');
     }
 
     public function purchase_products() {

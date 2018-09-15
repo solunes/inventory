@@ -48,19 +48,11 @@ class PurchaseProduct extends Model {
     }
                         
     public function currency() {
-        return $this->belongsTo('Solunes\Inventory\App\Currency');
+        return $this->belongsTo('Solunes\Business\App\Currency');
     }
 
     public function product() {
-        return $this->belongsTo('Solunes\Inventory\App\Product');
-    }
-
-    public function partner() {
-        return $this->belongsTo('Solunes\Inventory\App\Partner');
-    }
-
-    public function partner_transport() {
-        return $this->belongsTo('Solunes\Inventory\App\Partner','partner_id');
+        return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
 
     public function pending_payment() {

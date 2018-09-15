@@ -4,9 +4,9 @@ namespace Solunes\Inventory\App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductStock extends Model {
+class ProductBridgeStock extends Model {
 	
-	protected $table = 'product_stocks';
+	protected $table = 'product_bridge_stocks';
 	public $timestamps = true;
 
 	/* Transfer rules */
@@ -35,11 +35,11 @@ class ProductStock extends Model {
 	);
                         
     public function parent() {
-        return $this->belongsTo('Solunes\Inventory\App\Product');
+        return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
 
     public function place() {
-        return $this->belongsTo('Solunes\Inventory\App\Place');
+        return $this->belongsTo('Solunes\Business\App\Place');
     }
 
 }
