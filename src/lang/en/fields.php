@@ -8,7 +8,12 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-
+    'created_at' => 'Created At',
+    'id' => 'ID',
+    'name' => 'Name',
+    'status' => 'Status',
+    'type' => 'Type',
+    'updated_at' => 'Updated At',
     'agency' => 'Agency',
     'cost' => 'Cost',
     'currency' => 'Currency',

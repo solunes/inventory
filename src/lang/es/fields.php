@@ -9,6 +9,12 @@ return [
     |
     */
 
+    'created_at' => 'Fecha de Creación',
+    'id' => 'ID',
+    'name' => 'Nombre',
+    'status' => 'Estado',
+    'type' => 'Tipo',
+    'updated_at' => 'Fecha de Edición',
     'agency' => 'Agencia',
     'cost' => 'Costo',
     'currency' => 'Moneda',
