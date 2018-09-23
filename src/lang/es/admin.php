@@ -3,21 +3,17 @@
 return array(
 
 	// MENU
-	'inventory' => 'Negocio',
+	'inventory' => 'Inventario',
 
 	// CUSTOM TRANS
-	'0' => 'No',
-	'1' => 'Si',
-	'central' => 'Central',
-	'customer' => 'Cliente',
-	'employee' => 'Empleado',
-	'main' => 'Principal',
-	'office' => 'Oficina',
-	'other' => 'Otro',
-	'partner' => 'Socio',
-	'secondary' => 'Secundario',
-	'storage' => 'Almacen',
-	'store' => 'Tienda',
-	'supplier' => 'Proveedor',
+	'delivered' => 'Enviado',
+	'finished' => 'Finalizado',
+	'holding' => 'Pendiente',
+	'move_in' => 'Entrada',
+	'move_out' => 'Salida',
+	'normal' => 'Normal',
+	'online' => 'En Linea',
+	'paid' => 'Pagado',
+	'pending' => 'Pendiente',
 
 );
