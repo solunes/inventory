@@ -15,6 +15,7 @@ class Purchase extends Model {
 		'currency_id'=>'required',
         'name'=>'required',
         'type'=>'required',
+        'status'=>'required',
 	);
 
 	/* Updating rules */
@@ -24,6 +25,7 @@ class Purchase extends Model {
         'currency_id'=>'required',
         'name'=>'required',
         'type'=>'required',
+        'status'=>'required',
 	);
                         
     public function agency() {

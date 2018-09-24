@@ -16,8 +16,6 @@ class PurchaseProduct extends Model {
         'quantity'=>'required',
         'currency_id'=>'required',
         'cost'=>'required',
-        'partner_id'=>'required',
-        'partner_transport_id'=>'required',
     );
 
 	/* Creating rules */
@@ -27,20 +25,15 @@ class PurchaseProduct extends Model {
         'quantity'=>'required',
         'currency_id'=>'required',
         'cost'=>'required',
-        'partner_id'=>'required',
-        'partner_transport_id'=>'required',
 	);
 
 	/* Updating rules */
 	public static $rules_edit = array(
-		'id'=>'required',
         'product_bridge_id'=>'required',
         'status'=>'required',
         'quantity'=>'required',
         'currency_id'=>'required',
         'cost'=>'required',
-        'partner_id'=>'required',
-        'partner_transport_id'=>'required',
 	);
                         
     public function parent() {
@@ -56,7 +49,7 @@ class PurchaseProduct extends Model {
     }
 
     public function pending_payment() {
-        return $this->belongsTo('Solunes\Inventory\App\PendingPayment');
+        return $this->belongsTo('Solunes\Payments\App\Payment');
     }
 
     public function getTotalAttribute(){
