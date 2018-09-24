@@ -9,13 +9,9 @@ return [
     |
     */
 
-    'agency' => 'Agency|Agencies',
-    'city' => 'City|Cities',
-    'company' => 'Company|Companies',
-    'contact' => 'Contact|Contacts',
-    'currency' => 'Currency|Currencies',
-    'deal' => 'Deal|Deals',
-    'deal-company' => 'Deal Company|Deal Companies',
-    'deal-contact' => 'Deal Contact|Deal Contacts',
-    'region' => 'Region|Regions',
+    'inventory-movement' => 'Inventory Movement|Inventory Movements',
+    'product-bridge-stock' => 'Product Stock (Bridge)|Product Stock (Bridge)',
+    'purchase' => 'Purchase|Purchases',
+    'purchase-product' => 'Purchase Product|Purchase Products',
+
 ];

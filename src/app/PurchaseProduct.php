@@ -11,36 +11,29 @@ class PurchaseProduct extends Model {
     
     /* Creating rules */
     public static $rules_create_order = array(
-        'product_id'=>'required',
+        'product_bridge_id'=>'required',
         'status'=>'required',
         'quantity'=>'required',
         'currency_id'=>'required',
         'cost'=>'required',
-        'partner_id'=>'required',
-        'partner_transport_id'=>'required',
     );
 
 	/* Creating rules */
 	public static $rules_create = array(
-        'product_id'=>'required',
+        'product_bridge_id'=>'required',
         'status'=>'required',
         'quantity'=>'required',
         'currency_id'=>'required',
         'cost'=>'required',
-        'partner_id'=>'required',
-        'partner_transport_id'=>'required',
 	);
 
 	/* Updating rules */
 	public static $rules_edit = array(
-		'id'=>'required',
-        'product_id'=>'required',
+        'product_bridge_id'=>'required',
         'status'=>'required',
         'quantity'=>'required',
         'currency_id'=>'required',
         'cost'=>'required',
-        'partner_id'=>'required',
-        'partner_transport_id'=>'required',
 	);
                         
     public function parent() {
@@ -48,23 +41,15 @@ class PurchaseProduct extends Model {
     }
                         
     public function currency() {
-        return $this->belongsTo('Solunes\Inventory\App\Currency');
+        return $this->belongsTo('Solunes\Business\App\Currency');
     }
 
-    public function product() {
-        return $this->belongsTo('Solunes\Inventory\App\Product');
-    }
-
-    public function partner() {
-        return $this->belongsTo('Solunes\Inventory\App\Partner');
-    }
-
-    public function partner_transport() {
-        return $this->belongsTo('Solunes\Inventory\App\Partner','partner_id');
+    public function product_bridge() {
+        return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
 
     public function pending_payment() {
-        return $this->belongsTo('Solunes\Inventory\App\PendingPayment');
+        return $this->belongsTo('Solunes\Payments\App\Payment');
     }
 
     public function getTotalAttribute(){

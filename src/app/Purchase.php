@@ -11,23 +11,25 @@ class Purchase extends Model {
 
 	/* Creating rules */
 	public static $rules_create = array(
-		'place_id'=>'required',
+		'agency_id'=>'required',
 		'currency_id'=>'required',
         'name'=>'required',
         'type'=>'required',
+        'status'=>'required',
 	);
 
 	/* Updating rules */
 	public static $rules_edit = array(
 		'id'=>'required',
-		'place_id'=>'required',
+		'agency_id'=>'required',
         'currency_id'=>'required',
         'name'=>'required',
         'type'=>'required',
+        'status'=>'required',
 	);
                         
-    public function place() {
-        return $this->belongsTo('Solunes\Inventory\App\Place');
+    public function agency() {
+        return $this->belongsTo('Solunes\Business\App\Agency');
     }
 
     public function user() {
@@ -35,7 +37,7 @@ class Purchase extends Model {
     }
 
     public function currency() {
-        return $this->belongsTo('Solunes\Inventory\App\Currency');
+        return $this->belongsTo('Solunes\Business\App\Currency');
     }
 
     public function purchase_products() {
@@ -44,17 +46,17 @@ class Purchase extends Model {
 
     public function getTotalAttribute(){
     	$total = 0;
-    	$currency = \Solunes\Inventory\App\Currency::first();
+    	$currency = \Solunes\Business\App\Currency::first();
     	if(count($this->purchase_products)>0){
 	    	foreach($this->purchase_products as $batch){
-	    		$total += \Inventory::calculate_currency($batch->total, $currency, $batch->currency);
+	    		$total += \Business::calculate_currency($batch->total, $currency, $batch->currency);
 	    	}
     	}
     	return $total.' '.$currency->name;
     }
 
     public function item_get_after_vars($module, $node, $single_model, $id, $variables){
-    	$variables['product_node_id'] = \Solunes\Master\App\Node::where('name', 'product')->first()->id;
+    	$variables['product_node_id'] = \Solunes\Master\App\Node::where('name', 'product-bridge')->first()->id;
     	return $variables;
     }
 
