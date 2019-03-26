@@ -4,6 +4,57 @@ namespace Solunes\Inventory\App\Helpers;
 
 class Inventory {
 
+    public static function reduce_inventory($agency, $product_bridge, $variation = NULL, $units = 1) {
+        if($agency){
+          $agency_product_stock = NULL;
+          if($variation){
+            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $variation->id)->where('agency_id', $agency->id)->first();
+          } else {
+            $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+          }
+          if($agency_product_stock){
+            $quantity = $agency_product_stock->quantity;
+            $new_qunatity = $quantity - $units;
+            if($new_qunatity>=0){
+                $agency_product_stock->quantity = $new_qunatity;
+                $agency_product_stock->save();
+                return $agency_product_stock->quantity;
+            }
+          }
+        } 
+        return -1;
+    }
+
+    public static function increase_inventory($agency, $product_bridge, $variation = NULL, $units = 1) {
+        if($agency){
+          $agency_product_stock = NULL;
+          if($variation){
+            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $variation->id)->where('agency_id', $agency->id)->first();
+          } else {
+            $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+          }
+          if($agency_product_stock){
+            $quantity = $agency_product_stock->quantity;
+            $new_qunatity = $quantity + $units;
+            $agency_product_stock->quantity = $new_qunatity;
+            $agency_product_stock->save();
+          } else {
+            $agency_product_stock = new \Solunes\Inventory\App\ProductBridgeStock;
+            $agency_product_stock->parent_id = $product_bridge->id;
+            $agency_product_stock->agency_id = $agency->id;
+            if($variation){
+                $agency_product_stock->variation_id = $variation->id;
+            }
+            $agency_product_stock->initial_quantity = $units;
+            $agency_product_stock->quantity = $units;
+            $agency_product_stock->save();
+          }
+          return $agency_product_stock->quantity;
+        } else {
+          return -1;
+        }
+    }
+
     public static function inventory_movement($agency, $product, $type, $quantity, $name, $transaction, $item, $transaction_code = NULL) {
 
         // Crear Movimiento de Inventario
