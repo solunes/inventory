@@ -37,6 +37,18 @@ class ProductBridgeStock extends Model {
     public function parent() {
         return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
+                        
+    public function product_bridge() {
+        return $this->belongsTo('Solunes\Business\App\ProductBridge', 'parent_id');
+    }
+
+    public function product_bridge_variation() {
+        if(config('solunes.product')){
+            return $this->belongsToMany('\Solunes\Product\App\Variation', 'product_bridge_variation');
+        } else {
+            return $this->belongsToMany('\App\Variation', 'product_bridge_variation');
+        }
+    }
 
     public function agency() {
         return $this->belongsTo('Solunes\Business\App\Agency');

@@ -42,6 +42,9 @@ class NodesInventory extends Migration
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
             $table->integer('product_bridge_id')->unsigned();
+            if(config('business.product_variations')){
+                $table->integer('product_bridge_variation_id')->nullable();
+            }
             $table->enum('status', ['holding','finished'])->nullable()->default('holding');
             $table->integer('initial_quantity')->nullable()->default(0);
             $table->integer('quantity')->nullable()->default(0);
@@ -55,6 +58,9 @@ class NodesInventory extends Migration
             $table->increments('id');
             $table->integer('product_bridge_id')->unsigned();
             $table->integer('agency_id')->unsigned();
+            if(config('business.product_variations')){
+                $table->integer('product_bridge_variation_id')->nullable();
+            }
             $table->string('name')->nullable();
             $table->enum('type', ['move_in','move_out'])->nullable()->default('move_in');
             $table->integer('quantity')->nullable();
