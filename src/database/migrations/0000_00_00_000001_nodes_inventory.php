@@ -16,6 +16,9 @@ class NodesInventory extends Migration
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
             $table->integer('agency_id')->unsigned();
+            if(config('business.product_variations')){
+                $table->integer('product_bridge_variation_id')->nullable();
+            }
             $table->integer('initial_quantity')->nullable();
             $table->integer('quantity')->nullable();
             $table->timestamps();
