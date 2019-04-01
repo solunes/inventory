@@ -4,11 +4,30 @@ namespace Solunes\Inventory\App\Helpers;
 
 class Inventory {
 
-    public static function reduce_inventory($agency, $product_bridge, $variation = NULL, $units = 1) {
+    public static function successful_sale($sale, $sale_payment) {
+        if($sale->status=='paid'&&$sale->agency){
+            foreach($sale->sale_items as $sale_item){
+                $product_bridge = $sale_item->product_bridge;
+                if($product_bridge&&$product_bridge->delivery_type=='normal'&&$product_bridge->stockable){
+                    if(config('business.product_variations')){
+                        $product_bridge_variation = $sale_item->product_bridge_variation;
+                    } else {
+                        $product_bridge_variation = NULL;
+                    }
+                    \Inventory::reduce_inventory($sale->agency, $product_bridge, $sale_item->product_bridge_variation, $sale_item->quantity);
+                }
+            }
+            $sale->status = 'pending-delivery';
+            $sale->save();
+        }
+        return true;
+    }
+
+    public static function reduce_inventory($agency, $product_bridge, $product_bridge_variation = NULL, $units = 1) {
         if($agency){
           $agency_product_stock = NULL;
-          if($variation){
-            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $variation->id)->where('agency_id', $agency->id)->first();
+          if($product_bridge_variation){
+            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $product_bridge_variation->id)->where('agency_id', $agency->id)->first();
           } else {
             $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
           }

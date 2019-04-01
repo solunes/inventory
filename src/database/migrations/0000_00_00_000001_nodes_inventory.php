@@ -50,6 +50,7 @@ class NodesInventory extends Migration
             $table->integer('quantity')->nullable()->default(0);
             $table->integer('currency_id')->unsigned();
             $table->decimal('cost', 10, 2)->nullable();
+            $table->string('batch')->nullable();
             $table->timestamps();
             $table->foreign('parent_id')->references('id')->on('purchases')->onDelete('cascade');
             $table->foreign('product_bridge_id')->references('id')->on('product_bridges')->onDelete('cascade');
