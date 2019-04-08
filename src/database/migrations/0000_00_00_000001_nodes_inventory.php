@@ -16,6 +16,7 @@ class NodesInventory extends Migration
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
             $table->integer('agency_id')->unsigned();
+            $table->string('name')->nullable();
             if(config('business.product_variations')){
                 $table->integer('product_bridge_variation_id')->nullable();
             }
@@ -23,6 +24,41 @@ class NodesInventory extends Migration
             $table->integer('quantity')->nullable();
             $table->timestamps();
             $table->foreign('parent_id')->references('id')->on('product_bridges')->onDelete('cascade');
+            $table->foreign('agency_id')->references('id')->on('agencies')->onDelete('cascade');
+        });
+        Schema::create('stock_additions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('parent_id')->unsigned();
+            $table->integer('agency_id')->unsigned();
+            $table->integer('user_id')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->string('description')->nullable();
+            $table->timestamps();
+            $table->foreign('parent_id')->references('id')->on('product_bridge_stocks')->onDelete('cascade');
+            $table->foreign('agency_id')->references('id')->on('agencies')->onDelete('cascade');
+        });
+        Schema::create('stock_transfers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('parent_id')->unsigned();
+            $table->integer('from_agency_id')->unsigned();
+            $table->integer('to_agency_id')->unsigned();
+            $table->integer('user_id')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->string('description')->nullable();
+            $table->timestamps();
+            $table->foreign('parent_id')->references('id')->on('product_bridge_stocks')->onDelete('cascade');
+            $table->foreign('from_agency_id')->references('id')->on('agencies')->onDelete('cascade');
+            $table->foreign('to_agency_id')->references('id')->on('agencies')->onDelete('cascade');
+        });
+        Schema::create('stock_removals', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('parent_id')->unsigned();
+            $table->integer('agency_id')->unsigned();
+            $table->integer('user_id')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->string('description')->nullable();
+            $table->timestamps();
+            $table->foreign('parent_id')->references('id')->on('product_bridge_stocks')->onDelete('cascade');
             $table->foreign('agency_id')->references('id')->on('agencies')->onDelete('cascade');
         });
         Schema::create('purchases', function (Blueprint $table) {
@@ -81,6 +117,9 @@ class NodesInventory extends Migration
         Schema::dropIfExists('inventory_movements');
         Schema::dropIfExists('purchase_products');
         Schema::dropIfExists('purchases');
+        Schema::dropIfExists('stock_removals');
+        Schema::dropIfExists('stock_transfers');
+        Schema::dropIfExists('stock_additions');
         Schema::dropIfExists('product_bridge_stocks');
     }
 }

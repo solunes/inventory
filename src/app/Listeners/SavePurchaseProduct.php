@@ -1,6 +1,6 @@
 <?php
 
-namespace Solunes\Store\App\Listeners;
+namespace Solunes\Inventory\App\Listeners;
 
 class SavePurchaseProduct {
 

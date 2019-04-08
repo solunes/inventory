@@ -24,5 +24,11 @@ return [
     'purchase_products' => 'Purchase Products',
     'quantity' => 'Quantity',
     'user' => 'User',
-
+    'barcodes' => 'Códigos de Barra',
+    'batch' => 'Lote',
+    'description' => 'Descripción',
+    'from_agency' => 'Agencia de Procedencia',
+    'product_bridge_variation' => 'Variación Product Bridge',
+    'to_agency' => 'Agencia de Destino',
+    
 ];

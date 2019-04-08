@@ -39,6 +39,18 @@ class Inventory {
                 $agency_product_stock->save();
                 return $agency_product_stock->quantity;
             }
+          } else {
+            $agency_product_stock = new \Solunes\Inventory\App\ProductBridgeStock;
+            $agency_product_stock->parent_id = $product_bridge->id;
+            $agency_product_stock->agency_id = $agency->id;
+            $agency_product_stock->name = $product_bridge->name;
+            if($variation){
+                $agency_product_stock->product_bridge_variation_id = $variation->id;
+                $agency_product_stock->name = $agency_product_stock->name.' - '.$variation->name;
+            }
+            $agency_product_stock->initial_quantity = 0;
+            $agency_product_stock->quantity = 0;
+            $agency_product_stock->save();
           }
         } 
         return -1;
@@ -61,8 +73,10 @@ class Inventory {
             $agency_product_stock = new \Solunes\Inventory\App\ProductBridgeStock;
             $agency_product_stock->parent_id = $product_bridge->id;
             $agency_product_stock->agency_id = $agency->id;
+            $agency_product_stock->name = $product_bridge->name;
             if($variation){
-                $agency_product_stock->variation_id = $variation->id;
+                $agency_product_stock->product_bridge_variation_id = $variation->id;
+                $agency_product_stock->name = $agency_product_stock->name.' - '.$variation->name;
             }
             $agency_product_stock->initial_quantity = $units;
             $agency_product_stock->quantity = $units;

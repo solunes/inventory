@@ -16,6 +16,9 @@ class TruncateSeeder extends Seeder {
         \Solunes\Inventory\App\InventoryMovement::truncate();
         \Solunes\Inventory\App\PurchaseProduct::truncate();
         \Solunes\Inventory\App\Purchase::truncate();
+        \Solunes\Inventory\App\StockRemoval::truncate();
+        \Solunes\Inventory\App\StockTransfer::truncate();
+        \Solunes\Inventory\App\StockAddition::truncate();
         \Solunes\Inventory\App\ProductBridgeStock::truncate();
     }
 }

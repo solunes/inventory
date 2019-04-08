@@ -15,6 +15,9 @@ class MasterSeeder extends Seeder {
     {
         $node_product = \Solunes\Master\App\Node::where('name','product-bridge')->first();
         $node_product_bridge_stock = \Solunes\Master\App\Node::create(['name'=>'product-bridge-stock', 'type'=>'child', 'location'=>'inventory', 'parent_id'=>$node_product->id]);
+        $node_stock_addition = \Solunes\Master\App\Node::create(['name'=>'stock-addition', 'location'=>'inventory', 'folder'=>'products']);
+        $node_stock_transfer = \Solunes\Master\App\Node::create(['name'=>'stock-transfer', 'location'=>'inventory', 'folder'=>'products']);
+        $node_stock_removal = \Solunes\Master\App\Node::create(['name'=>'stock-removal', 'location'=>'inventory', 'folder'=>'products']);
         $node_purchase = \Solunes\Master\App\Node::create(['name'=>'purchase', 'location'=>'inventory', 'folder'=>'products']);
         $node_purchase_product = \Solunes\Master\App\Node::create(['name'=>'purchase-product', 'type'=>'child', 'location'=>'inventory', 'parent_id'=>$node_purchase->id]);
         $node_inventory_movement = \Solunes\Master\App\Node::create(['name'=>'inventory-movement', 'location'=>'inventory', 'folder'=>'products']);
