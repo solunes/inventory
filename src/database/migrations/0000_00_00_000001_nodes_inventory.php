@@ -29,6 +29,9 @@ class NodesInventory extends Migration
         Schema::create('stock_additions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
+            if(config('business.product_variations')){
+                $table->integer('product_bridge_variation_id')->nullable();
+            }
             $table->integer('agency_id')->unsigned();
             $table->integer('user_id')->nullable();
             $table->integer('quantity')->nullable();
@@ -40,6 +43,9 @@ class NodesInventory extends Migration
         Schema::create('stock_transfers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
+            if(config('business.product_variations')){
+                $table->integer('product_bridge_variation_id')->nullable();
+            }
             $table->integer('from_agency_id')->unsigned();
             $table->integer('to_agency_id')->unsigned();
             $table->integer('user_id')->nullable();
@@ -53,6 +59,9 @@ class NodesInventory extends Migration
         Schema::create('stock_removals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
+            if(config('business.product_variations')){
+                $table->integer('product_bridge_variation_id')->nullable();
+            }
             $table->integer('agency_id')->unsigned();
             $table->integer('user_id')->nullable();
             $table->integer('quantity')->nullable();
