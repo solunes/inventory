@@ -29,7 +29,11 @@ class Inventory {
           if($product_bridge_variation){
             $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $product_bridge_variation->id)->where('agency_id', $agency->id)->first();
           } else {
-            $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+            if(config('business.product_variations')){
+                $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+            } else {
+                $agency_product_stock = $product_bridge->product_bridge_stocks()->where('agency_id', $agency->id)->first();
+            }
           }
           if($agency_product_stock){
             $quantity = $agency_product_stock->quantity;
@@ -62,7 +66,11 @@ class Inventory {
           if($variation){
             $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $variation->id)->where('agency_id', $agency->id)->first();
           } else {
-            $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+            if(config('business.product_variations')){
+                $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+            } else {
+                $agency_product_stock = $product_bridge->product_bridge_stocks()->where('agency_id', $agency->id)->first();
+            }
           }
           if($agency_product_stock){
             $quantity = $agency_product_stock->quantity;
