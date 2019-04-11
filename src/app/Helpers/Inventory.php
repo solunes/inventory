@@ -14,7 +14,7 @@ class Inventory {
                     } else {
                         $product_bridge_variation = NULL;
                     }
-                    \Inventory::reduce_inventory($sale->agency, $product_bridge, $sale_item->product_bridge_variation, $sale_item->quantity);
+                    \Inventory::reduce_inventory($sale->agency, $product_bridge, $product_bridge_variation, $sale_item->quantity);
                 }
             }
             $sale->status = 'pending-delivery';
