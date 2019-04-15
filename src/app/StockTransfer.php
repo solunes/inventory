@@ -27,23 +27,23 @@ class StockTransfer extends Model {
 	);
                         
     public function parent() {
-        return $this->belongsTo('Solunes\Inventory\App\ProductBridgeStock');
+        return $this->belongsTo('Solunes\Business\App\ProductBridge');
     }
                                           
     public function product_bridge() {
         return $this->belongsTo('Solunes\Business\App\ProductBridge', 'parent_id');
     }
     
-    public function product_bridge_variation() {
-        if(config('solunes.product')){
-            return $this->belongsToMany('\Solunes\Product\App\Variation', 'product_bridge_variation', 'product_bridge_id', 'variation_id');
-        } else {
-            return $this->belongsToMany('\App\Variation', 'product_bridge_variation', 'variation_id');
-        }
+    public function getNameAttribute() {
+        return $this->product_bridge->name;
     }
 
-    public function product_bridge_stock() {
-        return $this->belongsTo('Solunes\Business\App\ProductBridge', 'parent_id');
+    public function product_bridge_variation() {
+        if(config('solunes.product')){
+            return $this->belongsTo('\Solunes\Product\App\Variation');
+        } else {
+            return $this->belongsTo('\App\Variation');
+        }
     }
 
     public function user() {

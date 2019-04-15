@@ -44,9 +44,9 @@ class ProductBridgeStock extends Model {
 
     public function product_bridge_variation() {
         if(config('solunes.product')){
-            return $this->belongsToMany('\Solunes\Product\App\Variation', 'product_bridge_variation', 'product_bridge_id', 'variation_id');
+            return $this->belongsTo('\Solunes\Product\App\Variation');
         } else {
-            return $this->belongsToMany('\App\Variation', 'product_bridge_variation', 'variation_id');
+            return $this->belongsTo('\App\Variation');
         }
     }
 

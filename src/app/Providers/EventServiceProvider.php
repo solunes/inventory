@@ -28,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         
         // Módulo de Proyectos
         $events->listen('eloquent.creating: Solunes\Inventory\App\InventoryMovement', '\Solunes\Inventory\App\Listeners\RegisteringInventoryMovement');
+        $events->listen('eloquent.created: Solunes\Inventory\App\StockAddition', '\Solunes\Inventory\App\Listeners\StockAdditionCreated');
+        $events->listen('eloquent.created: Solunes\Inventory\App\StockTransfer', '\Solunes\Inventory\App\Listeners\StockTransferCreated');
+        $events->listen('eloquent.created: Solunes\Inventory\App\StockRemoval', '\Solunes\Inventory\App\Listeners\StockRemovalCreated');
 
         parent::boot($events);
     }
