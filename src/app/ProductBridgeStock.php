@@ -42,12 +42,12 @@ class ProductBridgeStock extends Model {
         return $this->belongsTo('Solunes\Business\App\ProductBridge', 'parent_id');
     }
 
-    public function product_bridge_variation() {
-        if(config('solunes.product')){
-            return $this->belongsTo('\Solunes\Product\App\Variation');
-        } else {
-            return $this->belongsTo('\App\Variation');
-        }
+    public function variation() {
+        return $this->belongsTo('\Solunes\Business\App\Variation');
+    }
+
+    public function variation_option() {
+        return $this->belongsTo('\Solunes\Business\App\VariationOption');
     }
 
     public function agency() {

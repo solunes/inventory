@@ -52,6 +52,14 @@ class PurchaseProduct extends Model {
         return $this->belongsTo('Solunes\Payments\App\Payment');
     }
 
+    public function variation() {
+        return $this->belongsTo('\Solunes\Business\App\Variation');
+    }
+
+    public function variation_option() {
+        return $this->belongsTo('\Solunes\Business\App\VariationOption');
+    }
+    
     public function getTotalAttribute(){
         return $this->quantity * $this->cost;
     }

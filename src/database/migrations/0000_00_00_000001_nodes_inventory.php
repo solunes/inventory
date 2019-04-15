@@ -18,7 +18,8 @@ class NodesInventory extends Migration
             $table->integer('agency_id')->unsigned();
             $table->string('name')->nullable();
             if(config('business.product_variations')){
-                $table->integer('product_bridge_variation_id')->nullable();
+                $table->integer('variation_id')->nullable();
+                $table->integer('variation_option_id')->nullable();
             }
             $table->integer('initial_quantity')->nullable();
             $table->integer('quantity')->nullable();
@@ -30,7 +31,8 @@ class NodesInventory extends Migration
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
             if(config('business.product_variations')){
-                $table->integer('product_bridge_variation_id')->nullable();
+                $table->integer('variation_id')->nullable();
+                $table->integer('variation_option_id')->nullable();
             }
             $table->integer('agency_id')->unsigned();
             $table->integer('user_id')->nullable();
@@ -44,7 +46,8 @@ class NodesInventory extends Migration
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
             if(config('business.product_variations')){
-                $table->integer('product_bridge_variation_id')->nullable();
+                $table->integer('variation_id')->nullable();
+                $table->integer('variation_option_id')->nullable();
             }
             $table->integer('from_agency_id')->unsigned();
             $table->integer('to_agency_id')->unsigned();
@@ -60,7 +63,8 @@ class NodesInventory extends Migration
             $table->increments('id');
             $table->integer('parent_id')->unsigned();
             if(config('business.product_variations')){
-                $table->integer('product_bridge_variation_id')->nullable();
+                $table->integer('variation_id')->nullable();
+                $table->integer('variation_option_id')->nullable();
             }
             $table->integer('agency_id')->unsigned();
             $table->integer('user_id')->nullable();
@@ -88,7 +92,8 @@ class NodesInventory extends Migration
             $table->integer('parent_id')->unsigned();
             $table->integer('product_bridge_id')->unsigned();
             if(config('business.product_variations')){
-                $table->integer('product_bridge_variation_id')->nullable();
+                $table->integer('variation_id')->nullable();
+                $table->integer('variation_option_id')->nullable();
             }
             $table->enum('status', ['holding','finished'])->nullable()->default('holding');
             $table->integer('initial_quantity')->nullable()->default(0);
@@ -105,7 +110,8 @@ class NodesInventory extends Migration
             $table->integer('product_bridge_id')->unsigned();
             $table->integer('agency_id')->unsigned();
             if(config('business.product_variations')){
-                $table->integer('product_bridge_variation_id')->nullable();
+                $table->integer('variation_id')->nullable();
+                $table->integer('variation_option_id')->nullable();
             }
             $table->string('name')->nullable();
             $table->enum('type', ['move_in','move_out'])->nullable()->default('move_in');

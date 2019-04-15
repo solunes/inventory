@@ -10,7 +10,7 @@ class Inventory {
                 $product_bridge = $sale_item->product_bridge;
                 if($product_bridge&&$product_bridge->delivery_type=='normal'&&$product_bridge->stockable){
                     if(config('business.product_variations')){
-                        $product_bridge_variation = $sale_item->product_bridge_variation;
+                        $product_bridge_variation = $sale_item->product_bridge_variation_option_id;
                     } else {
                         $product_bridge_variation = NULL;
                     }
@@ -27,10 +27,10 @@ class Inventory {
         if($agency){
           $agency_product_stock = NULL;
           if($product_bridge_variation){
-            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $product_bridge_variation->id)->where('agency_id', $agency->id)->first();
+            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('variation_id', $product_bridge_variation->variation_id)->where('variation_option_id', $product_bridge_variation->variation_option_id)->where('agency_id', $agency->id)->first();
           } else {
             if(config('business.product_variations')){
-                $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+                $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('variation_id')->where('agency_id', $agency->id)->first();
             } else {
                 $agency_product_stock = $product_bridge->product_bridge_stocks()->where('agency_id', $agency->id)->first();
             }
@@ -48,9 +48,10 @@ class Inventory {
             $agency_product_stock->parent_id = $product_bridge->id;
             $agency_product_stock->agency_id = $agency->id;
             $agency_product_stock->name = $product_bridge->name;
-            if($variation){
-                $agency_product_stock->product_bridge_variation_id = $variation->id;
-                $agency_product_stock->name = $agency_product_stock->name.' - '.$variation->name;
+            if($product_bridge_variation){
+                $agency_product_stock->variation_id = $product_bridge_variation->variation_id;
+                $agency_product_stock->variation_option_id = $product_bridge_variation->variation_option_id;
+                $agency_product_stock->name = $agency_product_stock->name.' - '.$product_bridge_variation->name;
             }
             $agency_product_stock->initial_quantity = 0;
             $agency_product_stock->quantity = 0;
@@ -60,14 +61,14 @@ class Inventory {
         return -1;
     }
 
-    public static function increase_inventory($agency, $product_bridge, $variation = NULL, $units = 1) {
+    public static function increase_inventory($agency, $product_bridge, $product_bridge_variation = NULL, $units = 1) {
         if($agency){
           $agency_product_stock = NULL;
-          if($variation){
-            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('product_bridge_variation_id', $variation->id)->where('agency_id', $agency->id)->first();
+          if($product_bridge_variation){
+            $agency_product_stock = $product_bridge->product_bridge_stocks()->where('variation_id', $product_bridge_variation->variation_id)->where('variation_option_id', $product_bridge_variation->variation_option_id)->where('agency_id', $agency->id)->first();
           } else {
             if(config('business.product_variations')){
-                $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('product_bridge_variation_id')->where('agency_id', $agency->id)->first();
+                $agency_product_stock = $product_bridge->product_bridge_stocks()->whereNull('variation_id')->where('agency_id', $agency->id)->first();
             } else {
                 $agency_product_stock = $product_bridge->product_bridge_stocks()->where('agency_id', $agency->id)->first();
             }
@@ -82,9 +83,10 @@ class Inventory {
             $agency_product_stock->parent_id = $product_bridge->id;
             $agency_product_stock->agency_id = $agency->id;
             $agency_product_stock->name = $product_bridge->name;
-            if($variation){
-                $agency_product_stock->product_bridge_variation_id = $variation->id;
-                $agency_product_stock->name = $agency_product_stock->name.' - '.$variation->name;
+            if($product_bridge_variation){
+                $agency_product_stock->variation_id = $product_bridge_variation->variation_id;
+                $agency_product_stock->variation_option_id = $product_bridge_variation->variation_option_id;
+                $agency_product_stock->name = $agency_product_stock->name.' - '.$product_bridge_variation->name;
             }
             $agency_product_stock->initial_quantity = $units;
             $agency_product_stock->quantity = $units;
