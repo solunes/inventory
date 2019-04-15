@@ -31,5 +31,7 @@ return [
     'from_agency' => 'Agencia de Procedencia',
     'product_bridge_variation' => 'Variación Product Bridge',
     'to_agency' => 'Agencia de Destino',
+    'variation' => 'Variación',
+    'variation_option' => 'Opciones de Variación',
 
 ];
