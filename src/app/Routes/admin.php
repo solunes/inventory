@@ -14,6 +14,6 @@
 Route::group(['prefix'=>'admin'], function(){
     
     // Módulo de Reportes
-    //Route::get('inventory-report', 'ReportController@getInventoryReport');
+    Route::get('stock-report', 'ReportController@getStockReport');
 
 });

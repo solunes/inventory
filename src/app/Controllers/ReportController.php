@@ -82,4 +82,68 @@ class ReportController extends Controller {
     return \Inventory::check_report_view('inventory::list.sales-report', $array);
   }
 
+  public function getStockReport() {
+    $agencies = \Solunes\Business\App\Agency::where('id','>=',1);
+    $products = \Solunes\Business\App\ProductBridge::where('stockable',1);
+    $user = auth()->user();
+    $agencies_list = \Solunes\Business\App\Agency::where('id','>=',1);
+    $agency = $user->agency;
+    if(!$agency){
+      $agency = \Solunes\Business\App\Agency::first();
+    }
+    if($agency->type=='office'){
+      $subagencies = \Solunes\Business\App\Agency::whereIn('type', ['office','store'])->where('region_id', $agency->region_id)->lists('id')->toArray();
+      $agencies = $agencies->whereIn('id', $subagencies);
+      $agencies_list = $agencies_list->whereIn('id', $subagencies);
+    } else if($agency->type=='store'){
+      $agencies = $agencies->where('id', $agency->id);
+      $agencies_list = $agencies_list->where('id', $agency->id);
+    }
+    $agencies_list = $agencies_list->get()->lists('name','id')->toArray();
+    if(request()->has('filter')){
+      if(request()->has('agencies')){
+        $agencies = $agencies->whereIn('id', request()->input('agencies')); 
+      }
+      if(config('solunes.product')&&request()->has('categories')){
+        $product_category_ids = \Solunes\Product\App\Product::whereIn('category_id', request()->input('categories'))->lists('id')->toArray();
+        $products = $products->whereIn('product_id', $product_category_ids);  
+      }
+      if(request()->has('variation_options')){
+        $products = $products->whereIn('variation_option_id', request()->input('variation_options')); 
+      }
+    }
+    $agencies = $agencies->get();
+    $products = $products->get();
+    if(config('solunes.product')){
+      $categories_list = \Solunes\Product\App\Category::get()->lists('name','id')->toArray();
+    }
+    $variation_list = \Solunes\Business\App\Variation::where('stockable',1)->lists('id')->toArray();
+    $variation_options_list = \Solunes\Business\App\VariationOption::whereIn('parent_id', $variation_list)->get()->lists('name','id')->toArray();
+    $stock = [];
+    $graph_items = [];
+    foreach($agencies as $agency){
+      foreach($products as $product_bridge){
+        $product_stock = $product_bridge->product_bridge_stocks()->where('agency_id', $agency->id)->first();
+        if($product_stock){
+          $stock[$agency->id.'-'.$product_bridge->id] = $product_stock->quantity;
+        } else {
+          $stock[$agency->id.'-'.$product_bridge->id] = 0;
+        }
+        if(count($graph_items)<20){
+          $graph_items[$agency->name.' - '.$product_bridge->name] = $stock[$agency->id.'-'.$product_bridge->id];
+        }
+      }
+    }
+    $array['agencies_list'] = $agencies_list;
+    if(config('solunes.product')){
+      $array['categories_list'] = $categories_list;
+    }
+    $array['variation_options_list'] = $variation_options_list;
+    $array['agencies'] = $agencies;
+    $array['products'] = $products;
+    $array['stock'] = $stock;
+    $array['graph_items'] = $graph_items;
+    return view('inventory::content.stock-report', $array);
+  }
+
 }
