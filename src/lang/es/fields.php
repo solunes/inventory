@@ -18,6 +18,7 @@ return [
     'agency' => 'Agencia',
     'cost' => 'Costo',
     'currency' => 'Moneda',
+    'date' => 'Fecha',
     'files' => 'Archivos',
     'initial_quantity' => 'Cantidad Inicial',
     'parent' => 'De',
