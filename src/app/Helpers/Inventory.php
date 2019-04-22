@@ -20,11 +20,12 @@ class Inventory {
           if($agency_product_stock){
             $quantity = $agency_product_stock->quantity;
             $new_qunatity = $quantity - $units;
-            if($new_qunatity>=0){
-                $agency_product_stock->quantity = $new_qunatity;
-                $agency_product_stock->save();
-                return $agency_product_stock->quantity;
+            if($new_qunatity<0){
+              $new_qunatity = 0;
             }
+            $agency_product_stock->quantity = $new_qunatity;
+            $agency_product_stock->save();
+            return $agency_product_stock->quantity;
           } else {
             $agency_product_stock = new \Solunes\Inventory\App\ProductBridgeStock;
             $agency_product_stock->parent_id = $product_bridge->id;
