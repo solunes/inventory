@@ -22,9 +22,4 @@ class ProcessController extends Controller {
 	  $this->prev = $url->previous();
 	}
 
-  public function getCalculateShipping($shipping_id, $city_id, $weight) {
-    $shipping_array = \Sales::calculate_shipping_cost($shipping_id, $city_id, $weight);
-    return $shipping_array;
-  }
-
 }
