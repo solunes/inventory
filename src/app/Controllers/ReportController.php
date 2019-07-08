@@ -115,7 +115,7 @@ class ReportController extends Controller {
     $agencies = $agencies->get();
     $products = $products->get();
     if(config('solunes.product')){
-      $categories_list = \Solunes\Product\App\Category::get()->lists('name','id')->toArray();
+      $categories_list = \Solunes\Business\App\Category::get()->lists('name','id')->toArray();
     }
     $variation_list = \Solunes\Business\App\Variation::where('stockable',1)->lists('id')->toArray();
     $variation_options_list = \Solunes\Business\App\VariationOption::whereIn('parent_id', $variation_list)->get()->lists('name','id')->toArray();
