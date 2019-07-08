@@ -11,6 +11,6 @@
 |
 */
 
-Route::group(['prefix'=>'process'], function(){
+/*Route::group(['prefix'=>'process'], function(){
     Route::get('/calculate-shipping/{shipping_id}/{city_id}/{weight}', 'ProcessController@getCalculateShipping');
-});
+});*/
