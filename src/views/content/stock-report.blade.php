@@ -17,7 +17,7 @@
   <div id="list-graph-grafico" style="min-height: 400px;"></div>
   @endif
   
-  <table class="admin-table editable-list table table-striped table-bordered table-hover @if(config('solunes.list_horizontal_scroll')=='true') nowrap @else dt-responsive @endif">
+  <table class="admin-table-scroll editable-list table table-striped table-bordered table-hover @if(config('solunes.list_horizontal_scroll')=='true') nowrap @else dt-responsive @endif">
     <thead>
       <tr class="title">
         <td>#</td>
