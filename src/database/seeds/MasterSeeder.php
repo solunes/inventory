@@ -26,7 +26,8 @@ class MasterSeeder extends Seeder {
         $node_purchase_product = \Solunes\Master\App\Node::create(['name'=>'purchase-product', 'type'=>'child', 'location'=>'inventory', 'parent_id'=>$node_purchase->id]);
         $node_inventory_movement = \Solunes\Master\App\Node::create(['name'=>'inventory-movement', 'location'=>'inventory', 'folder'=>'products']);
        
-        \Solunes\Master\App\Menu::create(['menu_type'=>'admin','icon'=>'dollar','name'=>'Stock','permission'=>'business','link'=>'admin/stock-report']);
+        $menu = \Solunes\Master\App\Menu::create(['menu_type'=>'admin','icon'=>'dollar','name'=>'Stock','permission'=>'business','link'=>'admin/stock-report']);
+        $menu = \FuncNode::generate_translations($menu);
 
         // Usuarios
         $admin = \Solunes\Master\App\Role::where('name', 'admin')->first();
