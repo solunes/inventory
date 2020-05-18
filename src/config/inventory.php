@@ -4,6 +4,8 @@ return [
 
 	// GENERAL
 	'after_seed' => true,
+	'basic_inventory' => true,
+	'reduce_inventory_after_purchase' => true,
 
 	// CUSTOM FORMS
     'item_get_after_vars' => ['purchase','product'], // array de nodos: 'node'
