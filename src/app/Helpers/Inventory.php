@@ -5,7 +5,7 @@ namespace Solunes\Inventory\App\Helpers;
 class Inventory {
 
     public static function successful_sale($sale, $sale_payment) {
-        if($sale->status=='paid'&&$sale->agency){
+        if(($sale->status=='paid'||$sale->status=='to-pay')&&$sale->agency){
             $sale->status = 'pending-delivery';
             $sale->save();
         }
