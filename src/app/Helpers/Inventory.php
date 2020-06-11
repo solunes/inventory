@@ -14,10 +14,13 @@ class Inventory {
 
     public static function reduce_inventory($agency, $product_bridge, $units = 1) {
         if(config('inventory.basic_inventory')){
-          $product_bridge->quantity = $product_bridge->quantity - $units;
-          $product_bridge->save();
-          /*$product->quantity = $product_bridge->quantity;
-          $product->save();*/
+          /*$product_bridge->quantity = $product_bridge->quantity - $units;
+          $product_bridge->save();*/
+          $product = $product_bridge->product;
+          if($product){
+            $product->quantity = $product->quantity - $units;
+            $product->save();
+          }
           return -1;
         } else {
           if($agency){
