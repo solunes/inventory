@@ -19,9 +19,14 @@
     "autoload": {
         "classmap": [
             "src/database/migrations",
-            "src/app/Providers",
+            "src/database/seeds",
+            "src/app",
             "src/app/Controllers",
-            "src/app/Console"
+            "src/app/Console",
+            "src/app/Helpers",
+            "src/app/Listeners",
+            "src/app/Providers",
+            "src/app/Routes"
        ],
         "psr-4": {
             "Solunes\\Inventory\\": "src/"
