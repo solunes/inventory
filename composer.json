@@ -24,8 +24,8 @@
             "src/app/Controllers",
             "src/app/Console",
             "src/app/Helpers",
-            "src/app/Listeners",
             "src/app/Providers",
+            "src/app/Listeners",
             "src/app/Routes"
        ],
         "psr-4": {
